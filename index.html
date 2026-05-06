@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LM Digital Solutions LLC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0a0a;
+      color: #f5f5f5;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: -2;
+    }
+
+    .gradient {
+      position: fixed;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(0,255,170,0.15) 0%, rgba(0,0,0,0) 70%);
+      top: -200px;
+      right: -200px;
+      z-index: -1;
+      filter: blur(30px);
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    header {
+      padding: 32px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      background: rgba(10,10,10,0.75);
+      z-index: 100;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: #00ffaa;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: #00ffaa;
+    }
+
+    .hero {
+      padding: 120px 0 90px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      line-height: 1.05;
+      margin-bottom: 28px;
+      letter-spacing: -2px;
+    }
+
+    .hero h1 span {
+      color: #00ffaa;
+    }
+
+    .hero p {
+      color: rgba(255,255,255,0.75);
+      font-size: 1.08rem;
+      max-width: 720px;
+      margin-bottom: 34px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 24px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-primary {
+      background: #00ffaa;
+      color: #000;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0,255,170,0.18);
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #fff;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      padding: 32px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    .terminal-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .terminal-line span:last-child {
+      color: #00ffaa;
+    }
+
+    section {
+      padding: 90px 0;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      margin-bottom: 18px;
+      letter-spacing: -1px;
+    }
+
+    .section-subtitle {
+      color: rgba(255,255,255,0.7);
+      max-width: 760px;
+      margin-bottom: 50px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 28px;
+      transition: 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0,255,170,0.25);
+    }
+
+    .card h3 {
+      margin-bottom: 16px;
+      font-size: 1.15rem;
+    }
+
+    .card p,
+    .card li {
+      color: rgba(255,255,255,0.72);
+      font-size: 0.95rem;
+    }
+
+    .card ul {
+      padding-left: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
+    }
+
+    .step {
+      padding: 28px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .step-number {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(0,255,170,0.12);
+      color: #00ffaa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .badge {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.82);
+      font-size: 0.92rem;
+    }
+
+    .footer {
+      padding: 60px 0 80px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      text-align: center;
+      color: rgba(255,255,255,0.55);
+      font-size: 0.95rem;
+    }
+
+    .highlight {
+      color: #00ffaa;
+      font-weight: 600;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 2.9rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="gradient"></div>
+
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">LM Digital <span>Solutions</span> LLC</div>
+        <div class="nav-links">
+          <a href="#activities">Activities</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#tools">Platforms</a>
+          <a href="#operations">Operations</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <div>
+        <h1>
+          Remote Digital Asset Operations & <span>Blockchain-Based Financial Activities</span>
+        </h1>
+
+        <p>
+          LM Digital Solutions LLC operates entirely through internationally accessible digital platforms focused on digital asset management, decentralized finance participation, market analysis, portfolio monitoring, and blockchain-based financial operations.
+        </p>
+
+        <div class="buttons">
+          <a href="#activities" class="btn btn-primary">View Professional Activities</a>
+          <a href="#tools" class="btn btn-secondary">Platforms & Infrastructure</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="terminal-line">
+          <span>Company</span>
+          <span>LM Digital Solutions LLC</span>
+        </div>
+
+         <div class="terminal-line">
+          <span>Address</span>
+          <span>5830 E 2nd St Ste 7000 Casper, WY 82609</span>
+        </div>
+
+        <div class="terminal-line">
+          <span>Nature of Work</span>
+          <span>Remote / Digital Nomad</span>
+        </div>
+
+        <div class="terminal-line">
+          <span>Operational Model</span>
+          <span>Location Independent</span>
+        </div>
+
+        <div class="terminal-line">
+          <span>Industry</span>
+          <span>Digital Assets & DeFi</span>
+        </div>
+
+        <div class="terminal-line">
+          <span>Income Source</span>
+          <span>International Financial Markets</span>
+        </div>
+
+        <div class="terminal-line">
+          <span>Operational Structure</span>
+          <span>Cloud-Based Infrastructure</span>
+        </div>
+
+        <div class="terminal-line">
+          <span>Thai Operations</span>
+          <span>None</span>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="activities">
+      <div class="container">
+        <h2 class="section-title">Professional Activities</h2>
+        <p class="section-subtitle">
+          Professional activities are conducted entirely online through blockchain-based systems and digital financial infrastructure. Income is generated independently through market participation, portfolio management strategies, and decentralized finance ecosystems.
+        </p>
+
+        <div class="grid">
+          <div class="card">
+            <h3>Digital Asset Market Participation</h3>
+            <ul>
+              <li>Technical market analysis across multiple timeframes</li>
+              <li>Market structure evaluation and risk assessment</li>
+              <li>Short-term and medium-term positioning</li>
+              <li>Digital asset exposure management</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Portfolio Management</h3>
+            <ul>
+              <li>Portfolio monitoring across multiple platforms</li>
+              <li>Capital allocation and execution strategies</li>
+              <li>Performance evaluation and optimization</li>
+              <li>Risk management and exposure control</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>DeFi Ecosystems</h3>
+            <ul>
+              <li>Participation in decentralized finance protocols</li>
+              <li>Liquidity management strategies</li>
+              <li>Yield generation mechanisms</li>
+              <li>Blockchain ecosystem allocation</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Remote Financial Operations</h3>
+            <ul>
+              <li>Cloud-based operational infrastructure</li>
+              <li>Internationally accessible platforms</li>
+              <li>Secure blockchain-based systems</li>
+              <li>Fully remote workflow execution</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow">
+      <div class="container">
+        <h2 class="section-title">Daily Operational Workflow</h2>
+        <p class="section-subtitle">
+          The operational workflow combines market analysis, strategic capital allocation, portfolio monitoring, and decentralized finance participation through secure online systems.
+        </p>
+
+        <div class="workflow">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Market Analysis</h3>
+            <p>
+              Monitoring digital financial markets, identifying technical structures, evaluating support and resistance levels, and analyzing price movement conditions.
+            </p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Capital Allocation</h3>
+            <p>
+              Managing exposure across digital assets and decentralized finance ecosystems through structured capital deployment and execution strategies.
+            </p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Portfolio Monitoring</h3>
+            <p>
+              Tracking holdings, monitoring operational performance, evaluating market exposure, and maintaining efficient portfolio oversight.
+            </p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">4</div>
+            <h3>Risk Management</h3>
+            <p>
+              Applying structured risk management strategies and maintaining controlled exposure within digital asset markets and DeFi systems.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tools">
+      <div class="container">
+        <h2 class="section-title">Platforms & Digital Infrastructure</h2>
+        <p class="section-subtitle">
+          Daily operations are conducted through internationally accessible blockchain infrastructure, decentralized finance systems, and professional digital financial platforms.
+        </p>
+
+        <div class="stack">
+          <div class="badge">Hyperliquid</div>
+          <div class="badge">Aave</div>
+          <div class="badge">Debank</div>
+          <div class="badge">TradingView</div>
+          <div class="badge">Etherscan</div>
+          <div class="badge">Rabby Wallet</div>
+          <div class="badge">Blockchain Analytics</div>
+          <div class="badge">Portfolio Dashboards</div>
+          <div class="badge">DeFi Protocols</div>
+          <div class="badge">Cloud-Based Systems</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="operations">
+      <div class="container">
+        <h2 class="section-title">Operational Structure</h2>
+        <p class="section-subtitle">
+          LM Digital Solutions LLC operates under a fully remote and location-independent professional model.
+        </p>
+
+        <div class="grid">
+          <div class="card">
+            <h3>Remote Infrastructure</h3>
+            <p>
+              All activities are conducted entirely online through secure blockchain-based systems and internationally accessible digital platforms.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>International Operations</h3>
+            <p>
+              Income is generated through international financial markets and decentralized finance ecosystems without local Thai business operations.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Professional Model</h3>
+            <p>
+              Operations focus on structured market participation, portfolio management, decentralized finance participation, and digital financial strategy execution.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>
+        LM Digital Solutions LLC — Remote Digital Financial Operations & Blockchain-Based Infrastructure
+      </p>
+      <br>
+      <p>
+        <span class="highlight">Location Independent</span> • Fully Remote • International Financial Markets
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
